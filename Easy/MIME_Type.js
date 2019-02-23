@@ -34,22 +34,47 @@
 const N = +readline(); // Number of elements which make up the association table.
 const Q = +readline(); // Number Q of file names to be analyzed.
 
-const getType = obj => {
-  const x = readline().split` `;
-  obj[x[0].toLowerCase()] = x[1];
-  return obj;
+// const getType = obj => {
+//   const x = readline().split(` `);
+//   obj[x[0].toLowerCase()] = x[1]; // Hash table with a key and a value
+//   return obj;
+// };
+
+// const ext = [...Array(N)].reduce(getType, {}); // create such a table
+
+// print(
+//   [...Array(Q)]
+//     .map(() => {
+//       const extArr = readline()
+//         .toLowerCase()
+//         .split(`.`);
+//       const n = extArr.length > 1 ? extArr.length - 1 : 1;
+//       return ext[extArr[n]] || 'UNKNOWN';
+//     })
+//     .join('\n')
+// );
+
+const n = parseInt(readline()); // Number of elements which make up the association table.
+const q = parseInt(readline()); // Number Q of file names to be analyzed.
+
+var mimeMap = {};
+
+for (var i = 0; i < n; i++) {
+  var x = readline().split(' ');
+  mimeMap[x[0].toLowerCase()] = x[1];
+}
+
+const getMimeType = fileName => {
+  var qArray = fileName.split('.');
+  if (qArray.length > 1) {
+    let extension = qArray.pop().toLowerCase();
+    if (mimeMap[extension]) {
+      return mimeMap[extension];
+    }
+  }
+  return 'UNKNOWN';
 };
 
-const ext = [...Array(N)].reduce(getType, {});
-
-print(
-  [...Array(Q)]
-    .map(val => {
-      const extArr = readline()
-        .toLowerCase()
-        .split(`.`);
-      const n = extArr.length > 1 ? extArr.length - 1 : 1;
-      return ext[extArr[n]] || 'UNKNOWN';
-    })
-    .join('\n')
-);
+for (var j = 0; j < q; j++) {
+  print(getMimeType(readline()));
+}
