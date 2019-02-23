@@ -19,6 +19,6 @@ print(
     .fill() // and
     .map(() => +readline()) // read an initial array
     .sort((a, b) => a > b) // sort this array and
-    .map((x, i, arr) => Math.abs(x - arr[i + 1])) // calculate the differences
+    .map((x, i, arr) => Math.abs(x - arr[i + 1])) // create an array with the calculated differences
     .sort((a, b) => a > b)[0] // sort it again // and print the very first element - min value
 );
