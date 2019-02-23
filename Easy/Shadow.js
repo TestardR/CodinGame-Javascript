@@ -48,7 +48,7 @@ const [buildingWidth, buildingHeight] = readline()
 // Maximum moves
 const N = readline();
 
-// Position width and height
+// Batman's position in terms of width and height
 let [heroX, heroY] = readline()
   .split(' ')
   .map(x => +x);
@@ -56,16 +56,26 @@ let [heroX, heroY] = readline()
 // Initial values for binary search
 
 let above = 0;
-let left = 0;
 let below = buildingHeight - 1;
+let left = 0;
 let right = buildingWidth - 1;
 
 while (true) {
   const BOMB_DIR = readline();
-  BOMB_DIR.includes('L') && (right = heroX - 1);
-  BOMB_DIR.includes('R') && (left = heroX + 1);
-  BOMB_DIR.includes('U') && (below = heroY - 1);
-  BOMB_DIR.includes('D') && (above = heroY + 1);
+
+  if (BOMB_DIR.includes('L')) {
+    right = heroX - 1;
+  } else if (BOMB_DIR.includes('R')) {
+    left = heroX + 1;
+  } else if (BOMB_DIR.includes('U')) {
+    below = heroY - 1;
+  } else if (BOMB_DIR.includes('D')) {
+    above = heroY + 1;
+  }
+  // BOMB_DIR.includes('L') && (right = heroX - 1);
+  // BOMB_DIR.includes('R') && (left = heroX + 1);
+  // BOMB_DIR.includes('U') && (below = heroY - 1);
+  // BOMB_DIR.includes('D') && (above = heroY + 1);
   heroX = Math.floor((right + left) / 2);
   heroY = Math.floor((above + below) / 2);
   print(heroX, heroY);
